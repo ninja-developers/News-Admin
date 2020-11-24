@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <title>News Admin</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+<!-- ggfgfdgdfgfdgdfg -->
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDwKV2PogUw4h0desHmbhjClzwdOTa5tGA",
+    authDomain: "news-demo-786.firebaseapp.com",
+    databaseURL: "https://news-demo-786.firebaseio.com",
+    projectId: "news-demo-786",
+    storageBucket: "news-demo-786.appspot.com",
+    messagingSenderId: "893103022399",
+    appId: "1:893103022399:web:f8552dc804a8b474da738a"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  function writedata(){
+
+    var heading=document.getElementById("heading").value
+    var category=  document.getElementById("category").value
+    var textArticle=document.getElementById("textArticle").value
+    var image=document.getElementById("image").value
+
+
+      firebase.database().ref(category).push().set({
+          heading,
+          category,
+          textArticle,
+          image
+      })
+      firebase.database().ref("AllNews").push().set({
+          heading,
+          category,
+          textArticle,
+          image
+      })
+      alert("submitted!")
+
+  }
+</script>
+
+
+
+<!-- ends -->
+
+
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+
+            <h1 class="display-4">Admin panel</h1>
+        <form>
+            <div class="form-group">
+              <label for="heading">Heading</label>
+              <input type="text" class="form-control" id="heading" placeholder="Heading of article" required>
+            </div>
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select class="form-control" id="category" required>
+                <option>Tech</option>
+                <option>Sports</option>
+                <option>Business</option>
+                <option>National</option>
+                <option>International</option>
+                <option>Defence</option>
+                <option>Jobs</option>
+              </select>
+            </div>
+           
+            <div class="form-group">
+              <label for="textArticle">Write an article</label>
+              <textarea class="form-control" id="textArticle" rows="10" placeholder="Write article here" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Image URL (replace with file upload in project)</label>
+                <input type="text" class="form-control" id="image" placeholder="image hosting address" required> 
+            </div>
+            <input class="btn btn-primary" type="button" value="Submit" onclick="writedata()">
+
+          </form>
+        </div></div>
+    </body>
+</html>
