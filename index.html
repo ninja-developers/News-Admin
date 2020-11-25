@@ -23,14 +23,14 @@
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  function writedata(event){
+  function writedata(){
 
-    event.preventdefault()
+    // event.preventdefault()
     var heading=document.getElementById("heading").value
     var category=  document.getElementById("category").value
     var textArticle=document.getElementById("textArticle").value
     var image=document.getElementById("image").value
-
+if(heading && category && textArticle && image){
       firebase.database().ref(category).push().set({
           heading,
           category,
@@ -44,7 +44,11 @@
           image
       })
       alert("submitted!")
-
+}
+else
+{
+  alert('fill all fields!!')
+}
   }
 </script>
 
@@ -84,7 +88,7 @@
                 <label for="image">Image URL (replace with file upload in project)</label>
                 <input type="text" class="form-control" id="image" placeholder="image hosting address" required> 
             </div>
-            <input class="btn btn-primary" type="submit" value="Submit" onclick="writedata(event)">
+            <input class="btn btn-primary" type="button" value="Submit" onclick="writedata()">
 
           </form>
         </div></div>
